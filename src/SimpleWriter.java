@@ -11,6 +11,7 @@ public class SimpleWriter
 		try {
 			// try to open the buffered writer
 			BufferedWriter writer = new BufferedWriter(new FileWriter("silly.txt"));
+			// file locates into the current workspace.
 			
 			// write out the file
 			writer.write("Here is some text.");

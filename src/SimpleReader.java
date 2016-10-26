@@ -36,8 +36,11 @@ public class SimpleReader
 		}
 		catch(FileNotFoundException ex)
 		{
-			SimpleOutput.showError("Couldn't find " + fileName + " please pick it.");
+//			System.out.println("this is the function to pick the file");
+//			SimpleOutput.showError("Couldn't find " + fileName + " please pick it.");
+//			System.out.println("test before pickAFile");
 			fileName = FileChooser.pickAFile();
+			System.out.println("test after pickAFile");
 			readAndPrintFile(fileName);
 		}
 		catch(Exception ex)
