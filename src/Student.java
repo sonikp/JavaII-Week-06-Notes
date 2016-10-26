@@ -1,3 +1,6 @@
+import java.io.*;
+
+
 public class Student extends Object
 {
 	/********************************************
@@ -32,6 +35,37 @@ public class Student extends Object
 		this.name = theName;
 		this.gradeArray = theGradeArray;
 	}
+	
+	
+	/**
+	 * Program 101: Constructor that takes a Delimited String
+	 * @param delimString student information as a delimited string
+	 * @param nameDelim what delimits the name field from the grades
+	 * @param gradeDelim what delimits the grades
+	 */
+	public Student(String delimString, String nameDelim, String gradeDelim)
+	{
+		// split string based on name delimiter
+		String[] splitArray = delimString.split(nameDelim);
+		this.name = splitArray[0].trim();
+		
+		// get the grade string and break in and convert to double
+		String grades = splitArray[1];
+		String[] gradeStrArray = null;
+		if ( grades != null )
+		{
+			gradeStrArray= grades.split(gradeDelim);
+			this.gradeArray = new double[gradeStrArray.length];
+			for ( int i = 0; i < gradeStrArray.length; i++)
+			{
+				this.gradeArray[i] = Double.parseDouble(gradeStrArray[i]);
+			}
+			
+		}
+		
+	}
+	
+
 	
 	///////////////////methods///////////////////////
 	/************************************************
@@ -124,12 +158,20 @@ public class Student extends Object
 	/////////////////main///////////////////
 	public static void main(String[] args)
 	{
+		
+		
+		
+		// Program 101: test constructor that takes a delimited string
+		Student student3 = new Student("Susan Ericson:50,60,70,80,90,100",":",",");
+		System.out.println(student3);
+		
+		/*
 		Student student1 = new Student("Barb Ericson");
 		System.out.println(student1);
 		double[] gradeArray1 = {90,88,95,96,93};
 		Student student2 = new Student("Mark Guzdial", gradeArray1);
 		System.out.println(student2);
-	
+		*/
 		
 		
 		/*
