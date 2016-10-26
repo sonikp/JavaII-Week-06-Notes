@@ -53,7 +53,7 @@ public class SimpleReader
 		
 		
 		SimpleReader reader = new SimpleReader();
-		reader.readAndPrintFile("400x300.jpg");	//		test.txt
+		reader.readAndPrintFile("test.txt");	//		 //400x300.jpg
 		
 	}
 }

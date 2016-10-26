@@ -158,12 +158,13 @@ public class Student extends Object
 	/////////////////main///////////////////
 	public static void main(String[] args)
 	{
+
 		
-		
-		
+		/*
 		// Program 101: test constructor that takes a delimited string
 		Student student3 = new Student("Susan Ericson:50,60,70,80,90,100",":",",");
 		System.out.println(student3);
+		*/
 		
 		/*
 		Student student1 = new Student("Barb Ericson");
