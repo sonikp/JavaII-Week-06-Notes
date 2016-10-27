@@ -34,9 +34,27 @@ public class FormLetterGenerator
 			writer.newLine();
 			writer.write(city + " knows what an exceptional offer this is!");
 			writer.newLine();
-			writer.write("Especially those with lovelt eyes of " + eyeColor + "!");
+			writer.write("Especially those with lovely eyes of " + eyeColor + "!");
+			writer.newLine();
+			writer.write("We hope to hear from you soon.");
+			writer.newLine();
+			writer.newLine();
 			
+			// write the ending
+			writer.write("Sincerely,");
+			writer.newLine();
+			writer.write("I. M. Acrook");
+			
+			// close the file
+			writer.close();
+		} catch (Exception ex) {
+			System.out.println("Error writing to " + fileName);
 		}
 	}
 	
+	public static void main(String[] args)
+	{
+		FormLetterGenerator formGenerator =  new FormLetterGenerator();
+		formGenerator.writeLetter("Mr.", "Guzdial", "Decatur", "brown");
+	}
 }

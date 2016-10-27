@@ -1,0 +1,152 @@
+1. Defining a class
+	- Object reference = Person person
+	- instantiated: person = new Person();
+	- Object reference + instantiated = Person person = new Person();
+	- Object fields (instance variables) are declared at the class scope, outside
+	of any methods: eg
+		- private String name;
+		- private int age;
+		- private String ssiNumber;
+	
+	- Default initialization
+		- null for object references
+		- numbers = 0
+		- booleans = false
+	
+2. Constructors
+	- Constructors do not have return types
+	- Constructors have an identical name as the classname
+	- Conctructors are used to ensure that object is fully formed and in a reliably usable state
+	
+	- Overloading constructors
+	
+3. Debugger
+
+4. Setters and Getters
+	- methods to set and get values
+	- or/ modifiers and accessors
+	- best method for access private data fields by accessing from public methods
+	of only that class.
+
+5. Javadoc comments, use to help people to better understand the code you create
+	- becomes a HTML file 
+	- initiated with /**
+	- predefined tags enable HTML page creations, accessed with an @ symbol
+	- to create and execute Javadocs in eclipse, select
+		- Project/Create Javadocs
+		
+6. Software reuse via inheritance
+	- Inheritance = Is-A relationship
+	- the super keyword means: start checking with the parent of the class that
+	created the object
+	- to inherit from another class uses the 'extends' keyword
+	- To invoke the parent classes "no-arguement" constructor apply the:
+		super();
+	- Also, the fields are inherited from the parent class, these are then set in the current
+	object class, by calling the super keyword, it passes in the appropriate fields
+	from the parents
+	- 
+
+7. Polymorphism (Dynamic Binding)(Upcasting)
+	- Means: many forms
+	- Allows for processing of an object based on the object's type
+	- Methods defined in a parent class, and you have the option of redefining
+	the methods in the child class
+	- Dynamic or runtime binding makes sure the correct method gets run, based on the
+	type of object it was called on at run time
+	
+8. ArrayLists	(may be using downcasting)
+	- ArrayList objects dynamically resize themselves as needed
+	- Contains methods, add, get, set, size, remove methods
+**>	- Advantage: do not need to manage explicit index, add & iterate without caring
+	where we might be within the collection, or whether we will be overrunning any bounds
+**>	- Disadvantage: ArrrayList stores Objects:
+		- When you add something to an arrayList, you lose the information about waht the
+		object really is.
+		- Once you add something to a plain ArrayList, it is no longer a Person, Turtle, or a 
+		String, but rather an Object. This is why you don't retrieve an object from a
+		a plain arrayList, as you must cast it to the type that you know it was before you
+		invoked the method
+		((Turtle)turtle).forward(200); Casting object to type Turtle after calling it
+		from the arrayList.
+		- Because we are casting downwards in the inheritance hierarchy, this is 
+		known as "downcasting".
+	- Better use of plain ArrayList is to make use of a generic
+	- Generic syntax to bind t the Turtle class
+		> ArrayList<Turtle> turtlePond = new ArrayList<Turtle>()
+	- With above example, it is no longer required to cast from Object to Turtle, instead:
+		((Turtle)turtle).forward(200);
+		now;
+		turtle.forward(200);
+
+9. Strings 
+	- Strings are first class objects
+	- Strings are immutable, meaning once a string has been formed it cannot be changed
+	- many methods for editing string objects and creating new string objects
+	
+10. Files
+	- needs to use a buffering methods for reading and writing in the java.io package
+	- Reading basics:
+		
+		import java.io.*
+		
+		String fileName = "path-to-file";		// location of file on disk
+		BufferedReader buffReader = new FileReader(fileName);	// create file reader, assigned to a bufferreader reference
+		String aLine = null;	// 
+		
+		while((aLine = buffReader.readLine()) != null)	// while we can read a line, and if whatever is returned from aLine is not null, then continue with reading
+		{
+			System.out.println(aLine);		// take each line and print it out to console
+		}
+		
+		buffReader.close();
+	
+	- Writing basics:
+	
+		import java.io.*
+		
+		String fileName = "path-to-file";
+		BufferedWriter buffWriter = new FileWriter(fileName);	// create a FileWriter object containing the fileName and passing it to the buffWriter object
+		String aLine = "I would like to have a cookie!";
+		
+		buffWriter.write(aLine);
+		buffWriter.newLine();
+		buffWriter.write(aLine);
+		buffWriter.newLine();
+		buffWriter.write(aLine);
+		buffWriter.newLine();
+		
+		buffWriter.close();
+		
+		
+11. Exceptions
+	- BufferedReader & BufferedWriter through a lot of exceptions
+	- requires exception handling
+	
+	try
+	{
+		do something
+	}
+	catch
+	{
+		if it fails, return error
+	} 
+	finally
+	{
+		(optional) code that must be executed under all circumstances
+	}
+	
+	
+12. Random class
+	- randomness on a computer cannot manifest true randomness, they can only simulate it
+	
+	import java.util.Random;
+	Random random = new Random();
+	
+	int someInt = random.nextInt(101);	// from 1 to 100
+	System.out.println(someInt);
+	
+	double someDouble = random.nextDouble(); // from 0 to 1
+	System.out.println(someDouble);
+	 
+	
