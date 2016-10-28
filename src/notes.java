@@ -1,5 +1,5 @@
-import java.io.File;
-import java.util.Random;
+//import java.io.File;
+//import java.util.Random;
 
 
 
@@ -13,7 +13,44 @@ public class notes
 	
 	public static void main(String[] args)
 	{
-
+		
+		
+		/////////////////////////////////////////Chapter 11 Problems/////////////////////////////
+		
+		
+		
+		/*
+		 * 
+		
+		11.6 
+		
+		
+		
+		
+		11.5
+		notes newNote = new notes();
+		newNote.getClass();
+		System.out.print(newNote.getClass());
+		newNote.equals(obj)
+		
+		clone();
+		equals();
+		finalize();
+		getClass();
+		hashCode();
+		notify();
+		notifyAll();
+		toString();
+		wait();
+		wait();
+		
+		
+		*/
+		
+		/*
+		
+		*/
+		/*
 		Random randomGen = new Random();
 		for ( int i = 0; i < 10; i++)
 		{
@@ -30,6 +67,7 @@ public class notes
 		int i;
 		i = (int) c;
 		System.out.println(i);
+		*/
 		
 		
 		/*
