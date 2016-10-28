@@ -1,3 +1,9 @@
+import java.io.File;
+import java.util.Random;
+
+
+
+
 public class notes
 {
 	
@@ -7,6 +13,37 @@ public class notes
 	
 	public static void main(String[] args)
 	{
+
+		Random randomGen = new Random();
+		for ( int i = 0; i < 10; i++)
+		{
+			System.out.print(randomGen.nextDouble() + " \t" + randomGen.nextInt(11) + "\n");
+		}
+		
+		char c;
+		c = 'A';
+		System.out.println(c);
+		
+		char myChar = (char) 65;
+		System.out.println(myChar);
+
+		int i;
+		i = (int) c;
+		System.out.println(i);
+		
+		
+		/*
+		File dir = new File("/Users/Shared/Java-Libraries/CourseCD/results/");
+		System.out.println(dir);
+		System.out.println(dir.list());
+		String[] pathArray = dir.list();
+		for ( int i = 0; i < pathArray.length; i++ )
+		{
+			System.out.println(pathArray[i]);
+		}
+		*/
+		
+		
 		/**
 		 * 12.2.3 Processing Delimited Strings Using Split
 		 * 

@@ -55,8 +55,8 @@ public class TempFinder
 	public static void main(String[] args)
 	{
 		TempFinder finder = new TempFinder();
-		//FileChooser.setMediaPath("/Users/Shared/Java-Libraries/CourceCD/mediasources/");
-		String file = FileChooser.getMediaPath("/Users/Shared/Java-Libraries/CourceCD/mediasources/ajc-weather.html");	
+		FileChooser.setMediaPath("/Users/Shared/Java-Libraries/CourseCD/mediasources/");
+		String file = FileChooser.getMediaPath("ajc-weather.html");	// /Users/Shared/Java-Libraries/CourceCD/mediasources/ajc-weather.html
 		String temp = finder.getTemp(file);
 		if ( temp == null )
 		{
