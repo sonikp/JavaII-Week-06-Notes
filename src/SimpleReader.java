@@ -39,7 +39,8 @@ public class SimpleReader
 //			System.out.println("this is the function to pick the file");
 //			SimpleOutput.showError("Couldn't find " + fileName + " please pick it.");
 //			System.out.println("test before pickAFile");
-			fileName = FileChooser.pickAFile();
+			//fileName = FileChooser.pickAFile();
+			fileName = FileChooser.getMediaPath("test.txt");
 			System.out.println("test after pickAFile");
 			readAndPrintFile(fileName);
 		}
@@ -56,7 +57,7 @@ public class SimpleReader
 		
 		
 		SimpleReader reader = new SimpleReader();
-		reader.readAndPrintFile("test.txt");	//		 //400x300.jpg
+		reader.readAndPrintFile(FileChooser.getMediaPath("test.txt"));	//		 //400x300.jpg
 		
 	}
 }

@@ -56,7 +56,7 @@ public class notes
 		{
 			System.out.print(randomGen.nextDouble() + " \t" + randomGen.nextInt(11) + "\n");
 		}
-		
+		*/
 		char c;
 		c = 'A';
 		System.out.println(c);
@@ -67,7 +67,7 @@ public class notes
 		int i;
 		i = (int) c;
 		System.out.println(i);
-		*/
+		
 		
 		
 		/*
