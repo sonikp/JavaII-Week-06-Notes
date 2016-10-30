@@ -113,12 +113,12 @@ public class FileToCharArray extends SimpleSound
 	  public static void main(String[] args)
 	  {
 		  
-		  
+		  /*
 		  char[] charArray = new char[100];
 		  String secretMessage = FileChooser.getMediaPath("LittleMessage.txt");
 		  BufferedReader buffer = new BufferedReader(new read(secretMessage));
 		  int actualBuffered = buffer.read(charArray,0,100);
-		  
+		  */
 		  
 		  
 
@@ -145,15 +145,16 @@ public class FileToCharArray extends SimpleSound
 		  
 		  // http://www.codejava.net/java-se/file-io/how-to-read-and-write-text-file-in-java
 		  
+		  /*
 		  // read
 		  SimpleReader reader = new SimpleReader();
 		  reader.readAndPrintFile("LittleMessage.txt");
-		  
+		  */
 		  
 		  
 //		  // write
-//		  Sound s = new Sound(FileChooser.getMediaPath("her.wav"));
-//		  s.writeSampleAsText(FileChooser.getMediaPath("her.txt"));
+		  Sound s = new Sound(FileChooser.getMediaPath("her.wav"));
+		  s.writeSampleAsText(FileChooser.getMediaPath("her.txt"));
 		  
 		  
 		  /*
