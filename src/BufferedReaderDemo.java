@@ -26,6 +26,7 @@ public class BufferedReaderDemo
       
          // creates buffer
          char[] charBuffer = new char[is.available()];
+         is.available();
          
          // reads characters to buffer, offset 2, len 10
          br.read(charBuffer, 0, 1142);	// 103
