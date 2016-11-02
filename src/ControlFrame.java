@@ -97,10 +97,76 @@ public class ControlFrame extends JFrame
 		}
 		);	// end of anonymous inner class
 		// I'm here at the calculate menu item slide 12 on the notes @ 3:33
+		// slide 13 important information on the execution of the
+		// program and the different execution of the event handlers
 		
+		JMenuItem calcPanelItem = new JMenuItem("Calculate");
+		calcPanelItem.setMnemonic('C');
+		fileMenu.add(calcPanelItem);
+		calcPanelItem.addActionListener(new ActionListener()
+		{
+			public void actionPerformed ( ActionEvent event)
+			{
+				bar.remove( colorMenu );
+				mainPanel.remove( drawPanel);
+				mainPanel.remove(widthJSlider);
+				xValTextField.setText("");
+				yValTextField.setText("");
+				calcJLabel.setText("");
+				mainPanel.add(calcPanel, BorderLayout.CENTER);
+				validate();
+				repaint();
+			}
+		}
+		);
 		
+		JMenuItem drawPanelItem = new JMenuItem("DrawPanel");
+		drawPanelItem.setMnemonic('D');
+		fileMenu.add( drawPanelItem );
+		drawPanelItem.addActionListener(new ActionListener()
+		{
+			public void actionPerformed( ActionEvent event )
+			{
+				mainPanel.remove(calcPanel);
+				bar.add( colorMenu );
+				drawPanel.setBackground( Color.WHITE);
+				mainPanel.add( drawPanel, BorderLayout.CENTER);
+				mainPanel.add( widthJSlider, BorderLayout.SOUTH);
+				validate();
+				repaint();
+			}
+		}
+		);
+	
+		JMenuItem exitItem = new JMenuItem( "Exit" );
+		exitItem.setMnemonic( 'x');
+		fileMenu.add( exitItem );
+		exitItem.addActionListener( new ActionListener() 
+		{
+
+			public void actionPerformed(ActionEvent event) 
+			{
+				System.exit(0);
+				
+			}
+		}
+		);
 		
-	}
+		widthJSlider = new JSlider( SwingConstants.HORIZONTAL,0,100, drawPanel.getOvalWidth());
+		widthJSlider.setMajorTickSpacing(10);
+		widthJSlider.setPaintTicks( true );
+		
+		widthJSlider.addChangeListener(new ChangeListener() 
+		{
+			
+			public void stateChanged(ChangeEvent e) 
+			{
+				drawPanel.setOvalWidth( widthJSlider.getValue());
+				repaint();
+				
+			}
+		});
+	}// slide 15
 }
 
 
