@@ -56,10 +56,9 @@ public class ControlFrame extends JFrame
 		aboutItem.addActionListener(new ActionListener() // Beginning of anonymous inner class
 		{
 			
-			@Override
 			public void actionPerformed(ActionEvent event) 
 			{
-				// TODO Auto-generated method stub
+
 				JOptionPane.showMessageDialog( ControlFrame.this, "This application provides enhanced\n"
 						+ "control over multimedia projects. ", "About", JOptionPane.PLAIN_MESSAGE);
 				
@@ -166,7 +165,83 @@ public class ControlFrame extends JFrame
 				
 			}
 		});
-	}// slide 15
+		
+		xValTextField = new JTextField(3);
+		xValTextField.addActionListener(new ActionListener()
+		{
+			public void actionPerformed( ActionEvent event )
+			{
+				xStr = event.getActionCommand();
+			}
+		}
+		);
+		
+		calcPanel.add(xValTextField);
+		
+		yValTextField = new JTextField(3);
+		yValTextField.addActionListener(new ActionListener()
+		{
+			public void actionPerformed( ActionEvent event )
+			{
+				yStr = event.getActionCommand();
+			}
+		}
+		);
+		
+		calcPanel.add(yValTextField);
+		
+		calcJButton = new JButton( "Calculate" );
+		calcJButton.addActionListener( new ActionListener()
+		{
+			public void actionPerformed( ActionEvent event )
+			{
+				try
+				{
+					int x = Integer.parseInt(xStr);
+					int y = Integer.parseInt(yStr);
+					int result = x + y;
+					calcJLabel.setText(xStr + " + " + yStr + " = " + result);
+				}
+				catch (NumberFormatException e)
+				{
+					JOptionPane.showMessageDialog( ControlFrame.this, "You muse enter a valid number the <ENTER> for each textbox!", "Invalid Input", JOptionPane.ERROR_MESSAGE );
+					e.printStackTrace();
+				}
+			}
+		}
+		);
+		calcPanel.add( calcJButton );
+		// slide 17
+		calcJLabel = new JLabel();
+		calcPanel.add( calcJLabel,BorderLayout.CENTER);
+		
+		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		
+		setSize( 200,250 );
+		setVisible( true );
+		validate();
+		
+		/*
+		
+		The Java Tutorials: Creating a GUI with JFC.Swing ( The Swing Tutorial )
+		http://java.sun.com/docs/books/tutorial/uiswing/
+		
+		The Swing Tutorial
+		http://www.javabeginner.com/java-swing/java-swing-tutorial/
+		
+		SwingWiki: 
+		http://www.swingwiki.org
+		
+		The SwingSet2 Demo
+		<JDK Install Direcroty/demo/jfc/SwingSet2
+		
+		command line:
+		jar xf SwingSet2.jar
+		
+		*/
+		
+	}
+	
 }
 
 
