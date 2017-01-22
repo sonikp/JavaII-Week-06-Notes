@@ -1,0 +1,637 @@
+
+/**
+ * Class that represents a sound.  This class is used by the students
+ * to extend the capabilities of SimpleSound. 
+ * 
+ * Copyright Georgia Institute of Technology 2004
+ * @author Barbara Ericson ericson@cc.gatech.edu
+ */
+public class Sound extends SimpleSound
+{
+  
+  /////////////// consructors ////////////////////////////////////
+  
+  /**
+   * Constructor that takes a file name
+   * @param fileName the name of the file to read the sound from
+   */
+  public Sound(String fileName)
+  {
+    // let the parent class handle setting the file name
+    super(fileName);
+  }
+  
+  /**
+   * Constructor that takes the number of samples in
+   * the sound
+   * @param numSamples the number of samples desired
+   */
+  public Sound (int numSamples)
+  {
+    // let the parent class handle this
+    super(numSamples);
+  }
+  
+  /**
+   * Constructor that takes the number of samples that this
+   * sound will have and the sample rate
+   * @param numSamples the number of samples desired
+   * @param sampleRate the number of samples per second
+   */
+  public Sound (int numSamples, int sampleRate)
+  {
+    // let the parent class handle this
+    super(numSamples,sampleRate);
+  }
+  
+  /**
+   * Constructor that takes a sound to copy
+   */
+  public Sound (Sound copySound)
+  {
+    // let the parent class handle this
+    super(copySound);
+  }
+  
+  ////////////////// methods ////////////////////////////////////
+  
+  // Assignment Week 05 
+  
+  /*
+   * Task 1 : Increase volume method
+   * using a for-each loop
+   */
+  public void increaseVolume()
+  {
+	  SoundSample[] soundArray = this.getSamples();
+	  
+	  
+	  for (SoundSample sample : soundArray)
+	  {
+		  // increase volume by multiplier of 2
+		  sample.setValue(sample.getValue() * 2);
+	  }
+  }
+  
+  // better use of code; learnt from Assignment 3
+  public void increaseVolume2()
+  {
+	  increaseVolume(2); 
+  }
+  
+  public void increaseVolume(int multiplier)
+  {
+	  SoundSample[] soundArray = this.getSamples();
+	  int value = 0;	  
+	  
+	  // for-each loop
+	  for (SoundSample sample : soundArray)
+	  {
+		  // get sample rate
+		  value = sample.getValue();
+		  
+		  // add multiplier
+		  value = value * multiplier;
+
+		  // apply limits to prevent clipping
+		  if ( value > 32764 )	// don't go right to the limit 32767
+		  {
+			  // limit extreme +ve values
+			  sample.setValue(32760);
+
+		  }
+		  else if ( value < -32764 )	// don't go right to the limit -32768
+		  {
+			  // limit extreme -ve values
+			  sample.setValue(-32760);
+		  }
+		  else if(value < 32767 && value > -32768 )
+		  {
+			  // set acceptable values within audible limits
+			  sample.setValue(value);
+		  }
+
+	  }
+
+  }
+  
+  /*
+   * Task 2: halvePosDoubleNeg - halves the volume of positive 
+   * values and doubles the volume of negative values
+   */
+  public void halvePosDoubleNeg()
+  {
+	  SoundSample[] soundArray = this.getSamples();
+	  SoundSample sample = null;
+	  int index = 0;
+  
+	  // loop through the wav file
+	  while ( index < soundArray.length )
+	  {
+		  // create an array for the sound
+		  sample = soundArray[index];
+		  
+		  // apply alterations +ve * 0.5 & -ve * 2
+		  if ( sample.getValue() >= 0 )
+		  {
+			  //System.out.print(sample.getValue() + "\t" + (int)(sample.getValue() * 0.5) + "\t\n");  // debug code left in on purpose
+			  sample.setValue((int)(sample.getValue() * 0.5));
+		  }
+		  else if (sample.getValue() < 0)
+		  {
+			  //System.out.print(sample.getValue() + "\t" + (sample.getValue() * 2) + "\t\n");		// debug code
+			  sample.setValue(sample.getValue() * 2);
+		  }
+		  index++;  
+	  }
+}
+  /*
+   * Task 3: Collage: make a mirror method
+   * 
+   */
+  public void mirror()
+  {
+	  int length = this.getLength();
+	  int mirrorPoint = length / 2;
+	  int value = 0;
+	  
+	  // loop from 0 to mirror point
+	  for ( int i = 0; i < mirrorPoint; i++)
+	  {
+		  value = this.getSampleValueAt(i);
+		  this.setSampleValueAt(length - 1 - i, value);
+	  }
+  }
+  
+  public void mirror(Sound source, int targetStart)
+  {
+	  int length = source.getLength();
+	  int mirrorPoint = length / 2;
+	  int value = 0;
+
+	  // loop from 0 to mirror point
+	  for ( int i = 0; i < source.getLength(); i++)		//	mirrorPoint		&& targetIndex < this.getLength(), targetIndex = targetStart
+	  {
+		  value = this.getSampleValueAt(i);
+		  System.out.println(value);
+		  this.setSampleValueAt(targetStart + length - 1 - i, value);		
+	  }
+  }
+  /*
+  ------------------------------------------------------DELETE---------------
+  public void spliceHelloWorldTooMuchCode()
+  {
+	
+	  String file1 = FileChooser.getMediaPath("helloWorld.wav");	// 8704, 14892
+	  String file2 = FileChooser.getMediaPath("Elliot-hello.wav");
+	  Sound source1 = new Sound(file1);
+	  Sound source2 = new Sound(file2);
+	  int targetIndex = 0;
+	  int value = 0;
+	  int sample1HelloStart = 2704;	//8704
+	  int sample1HelloEnd = 14892;
+	  int sample1WorldStart = 14983;
+	  int sample1WorldEnd = 44033;
+	  
+	  // loop copying hello 1
+	  	for ( int sourceIndex = sample1HelloStart; sourceIndex < sample1HelloEnd; sourceIndex++, targetIndex++)
+		{
+			value = source1.getSampleValueAt(sourceIndex);
+			this.setSampleValueAt(targetIndex, value);
+		}
+		
+		// print value of the target index
+		System.out.println("Target index is " + targetIndex);
+		
+		// loop copying hello 2
+		for ( int sourceIndex = sample1HelloStart; sourceIndex < sample1HelloEnd; sourceIndex++, targetIndex++)
+		{
+			value = source1.getSampleValueAt(sourceIndex);
+			this.setSampleValueAt(targetIndex, value);
+		}
+		
+		// print value of the target index
+		System.out.println("Target index is " + targetIndex);
+				
+		
+		// loop copying hello 3
+		for ( int sourceIndex = sample1HelloStart; sourceIndex < sample1HelloEnd; sourceIndex++, targetIndex++)
+		{
+			value = source1.getSampleValueAt(sourceIndex);
+			this.setSampleValueAt(targetIndex, value);
+		}
+		
+		// print value of the target index
+		System.out.println("Target index is " + targetIndex);
+		
+		// loop copying world 1
+		for ( int sourceIndex = sample1WorldStart; sourceIndex < sample1WorldEnd; sourceIndex++, targetIndex++)
+		{
+			value = source1.getSampleValueAt(sourceIndex);
+			this.setSampleValueAt(targetIndex, value);
+		}
+		
+		// print value of the target index
+		System.out.println("Target index is " + targetIndex);
+  }
+  */
+  // examples from text book
+  public void spliceHelloWorld()
+	{
+		//String file = FileChooser.getMediaPath("preamble10.wav");
+	  	String file = FileChooser.getMediaPath("helloWorld.wav");	// 8704, 14892
+		Sound source = new Sound(file);
+		//System.out.println(source.getLength());
+		int targetIndex = 0;
+		int finalStart = 0;
+		int finalEnd = 1000000;
+		int value = 0;
+		int sampleHelloStart = 2704;	//8704
+		int sampleHelloEnd = 14892;
+		int sampleWorldStart = 14983;
+		int sampleWorldEnd = 44033;
+		
+		source.clip(2704,14892);
+		source.play();
+		/*
+		Sound s1 = source.clip(2704,14892);
+		Sound s2 = source.clip(2704,14892);
+		Sound s3 = source.clip(2704,14892);
+		SoundSample[] soundArray1 = s1.getSamples();
+		SoundSample sound1 = null;
+		*/
+		/*
+		// for-each loop
+		for (int i = finalStart; i < finalEnd; i++, targetIndex++)
+		{
+			//sound1 = soundArray1[i];
+			//value = sound1.getValue();
+		}
+		
+		
+		//source.clip(2704,14892);
+		s1.play();
+		
+		
+		return source;
+		*/
+		/*
+		// loop copying hello 1
+		for ( int sourceIndex = sampleHelloStart; sourceIndex < sampleHelloEnd; sourceIndex++, targetIndex++)
+		{
+			value = source.getSampleValueAt(sourceIndex);
+			this.setSampleValueAt(targetIndex, value);
+		}
+		
+		// print value of the target index
+		System.out.println("Target index is " + targetIndex);
+		
+		// loop copying hello 2
+		for ( int sourceIndex = sampleHelloStart; sourceIndex < sampleHelloEnd; sourceIndex++, targetIndex++)
+		{
+			value = source.getSampleValueAt(sourceIndex);
+			this.setSampleValueAt(targetIndex, value);
+		}
+		
+		// print value of the target index
+		System.out.println("Target index is " + targetIndex);
+				
+		
+		// loop copying hello 3
+		for ( int sourceIndex = sampleHelloStart; sourceIndex < sampleHelloEnd; sourceIndex++, targetIndex++)
+		{
+			value = source.getSampleValueAt(sourceIndex);
+			this.setSampleValueAt(targetIndex, value);
+		}
+		
+		// print value of the target index
+		System.out.println("Target index is " + targetIndex);
+		
+		// loop copying world 1
+		for ( int sourceIndex = sampleWorldStart; sourceIndex < sampleWorldEnd; sourceIndex++, targetIndex++)
+		{
+			value = source.getSampleValueAt(sourceIndex);
+			this.setSampleValueAt(targetIndex, value);
+		}
+		
+		// print value of the target index
+		System.out.println("Target index is " + targetIndex);
+		*/
+
+	}
+  
+	/*
+	 * Create a Sound Clip
+	 */
+	public void clip(int start, int end)
+	{
+		// calculate the number of samples in the clip
+		int lengthInSamples = end - start + 1;		
+		Sound target = new Sound(lengthInSamples + start);	// hold clip
+		int value = 0;								// holds the current sample value	
+		//int targetIndex = 0;						// index in target sound
+
+		// copy from start to end from source into target
+		for ( int i = start; i <= end; i++)
+		{
+			value = this.getSampleValueAt(i);
+			target.setSampleValueAt(i, value);
+		}
+		//return target;
+	}
+	
+	/*
+	 * Clear the sound from a file to use as a blank slate
+	 */
+	
+	public void clear()
+	{
+		SoundSample[] sourceArray = this.getSamples();
+		
+		for ( SoundSample sound : sourceArray )
+		{
+			sound.setValue(0);
+		}
+		
+	}
+
+	/*
+	 * Program 76: General Splice Methods
+	 */
+	public void clipEdit(Sound source, int sourceStart, int sourceStop, int targetStart)
+	{
+		// loop copying from source to target
+		for ( int sourceIndex = sourceStart, targetIndex = targetStart; 
+				sourceIndex < sourceStop && targetIndex < this.getLength(); 
+				sourceIndex++, targetIndex++)
+		{
+			this.setSampleValueAt(targetIndex, source.getSampleValueAt(sourceIndex));
+			
+		}
+	}
+	
+	/*
+	 * Program 77: Using the General Splice Method
+	 */
+	public void splicer(Sound clip1, Sound clip2, Sound clip3)
+	{
+		//Sound preamble = new Sound(FileChooser.getMediaPath("preamble10.wav"));	// sec3silence.wav
+		//String file = FileChooser.getMediaPath("helloWorld.wav");
+//		Sound clip1 = new Sound(FileChooser.getMediaPath("helloWorld.wav"));	//2704,14892
+//		Sound clip2 = new Sound(FileChooser.getMediaPath("thisisatest.wav"));
+//		Sound clip3 = new Sound(FileChooser.getMediaPath("fun.wav"));
+		
+		System.out.println(clip1.getLength());
+		//clip1.explore();		//	hello - 2704,14892 && World 14892,35156
+		//clip2.explore();		// 	this is a 0, 43600, test 43600,60800
+		//clip3.explore();		// 0 - 11134	
+		
+		//mirror(clip1);
+//		clip2.play();
+		
+
+		clipEdit(clip3,0,12745,0);
+		mirror(clip3,20000);
+		
+		
+		
+//		clipEdit(clip1,2704,14892,0);
+//		clipEdit(clip1,2704,14892,14892); 
+//		clipEdit(clip1,2704,35156,29784);
+		
+		//mirror(clip1,0);
+		
+		//clipEdit(clip1,2704,14892,0);
+		//clipEdit(clip1,2704,35156,0);
+		//explore();
+		//mirror(clip3,0);
+		//explore();
+		
+		
+		/*
+		// first splice 
+		clipEdit(clip1,2704,14892,0);
+		
+		
+		// first splice 
+		clipEdit(clip1,2704,14892,14892); 
+		
+		// first splice 
+		clipEdit(clip1,2704,35156,29784);
+		
+		
+		
+		
+		// first splice 
+		clipEdit(clip2,0,43600, 62236);
+		
+		clipEdit(clip3,0,11134,105836);
+		
+		//mirror(clip2,116970);
+		
+		//clipEdit(clip2,116970);
+		
+		clipEdit(clip2,43600,60800,116970);
+		
+		this.explore();
+
+		*/
+		
+		
+		/*
+		// now splice the "united" into the current sound
+		this.splice(helloOne,2704,14892,29784);	//
+		
+		// now splice the "people of the United States" into the current sound
+		this.splice(helloOne,2704,14892, 44676);
+		*/
+		//this.splice(helloTwo, 0, 55555, 0);
+	}
+	
+
+  
+  /**
+   * Method to return the string representation of this sound
+   * @return a string with information about this sound
+   */
+  public String toString()
+  {
+    String output = "Sound";
+    String fileName = getFileName();
+    
+    // if there is a file name then add that to the output
+    if (fileName != null)
+      output = output + " file: " + fileName;
+    
+    // add the length in frames
+    output = output + " number of samples: " + getLengthInFrames();
+    
+    return output;
+  }
+ 
+  public static void main(String[] args)
+  {
+	  
+	  
+	  /*
+	  // Program: 82 Create Multiple Echo's
+	  Sound sound = new Sound(FileChooser.getMediaPath("croak.wav"));
+	  Sound echo = sound.echo(8000, 5);
+	  echo.play();
+	  //sound.echo(8000, 5);
+	  //sound.play();
+	  */
+	  
+	  
+	  // Program 77 & 76: 
+	  //String filename = FileChooser.getMediaPath("");	//		sec3silence.wav
+	  Sound target = new Sound(FileChooser.getMediaPath("gettysburg.wav"));
+		Sound clip1 = new Sound(FileChooser.getMediaPath("helloWorld.wav"));	//2704,14892
+		Sound clip2 = new Sound(FileChooser.getMediaPath("thisisatest.wav"));
+		Sound clip3 = new Sound(FileChooser.getMediaPath("fun.wav"));
+		
+		
+		//clip1.mirror(clip1,0);
+		//play();
+      target.clear();
+	  target.splicer(clip1, clip2, clip3);
+	  target.play();
+	  
+	  //Sound sourceClear = sourceNoisey.clear();
+	  /*
+	  Sound clip2 = new Sound(FileChooser.getMediaPath("thisisatest.wav"));
+	  clip2.mirror();
+	  clip2.play();
+	  */
+	  /*
+	  //
+	  
+	  
+	  System.out.println(target.getLength());
+	  
+	  target.splicer();
+	  target.play();
+	  
+//	  target.play();
+ 		*/
+ 
+	  
+	  
+	  
+	  /*
+	  String file2 = FileChooser.getMediaPath("Elliot-hello.wav");
+	  Sound test = new Sound(FileChooser.getMediaPath("helloWorld.wav"));
+	 //Sound s = new Sound(file2);
+	 // System.out.println(s.getLength());
+	  //Sound s1 = test.clip(9704, 16892);
+	  test.clip(1, 5);
+	  //test.explore();
+	  //s.explore();
+//	  s.clip(0, 2000);
+//	  s.play();
+ * */
+
+	  
+	/*
+	  // Program 75:		<===
+		  String silence1 = FileChooser.getMediaPath("sec3silence.wav");	
+		  String silence2 = FileChooser.getMediaPath("thisisatest.wav");	
+		  Sound target1 = new Sound(silence1);
+		  Sound target2 = new Sound(silence2);
+		  System.out.println(target1.getLength());
+		  System.out.println(target2.getLength());
+		  //target.explore();
+		  
+		  target1.spliceHelloWorldTooMuchCode();
+		  target1.play();
+		  //target1.explore();
+		  
+	*/
+	
+	
+	// 
+	
+	
+	// Chapter 9 Program 72: Create a sound clip
+//		  Sound test = new Sound(FileChooser.getMediaPath("helloWorld.wav"));
+//		  System.out.println(test.getLength());
+		  //test.explore();
+		  
+		  //Sound s1 = test.clip(9704, 16892);	//		8704, 14892 // 14892, 44032
+		  //s1.explore();
+		  //s1 = test.clip(14892, 44032);
+		  //s1.explore();
+		 // s1.play();
+		  //s1.explore();
+		  //Sound clip = test.tapeSplicer(9704, 16892);
+		  
+		  
+		 //s1.explore();
+		  //s1.write("/Users/Shared/Java-Libraries/CourseCD/results/s1-this.wav");
+	  		
+	 
+	  
+	  
+	  
+	  /*
+	Sound collage1 = new Sound(FileChooser.getMediaPath("helloWorld.wav")); 
+	Sound collage2 = new Sound(FileChooser.getMediaPath("Elliot-hello.wav"));
+	
+	String silence = FileChooser.getMediaPath("sec3silence.wav");
+	Sound target = new Sound(silence);
+//	target.play();
+	target.splice();
+	target.play();
+	
+	//collage2.explore();
+	collage2.splice();
+	collage2.play();
+	*/
+	/*
+	collage1.explore();
+	collage1.mirror();
+	collage1.explore();
+	*/
+	
+		  
+		  
+	
+	/*
+	 * Task 3: Make an audio collage;
+	 * - at least 5 seconds long
+	 * - at least 2 different sounds (from different files)
+	 * - Make copy of one sound and mirror it
+	 * - Splice together the original sounds and generate a single output file
+	 * - write to disk
+	 */
+	
+	/*
+	String silence = FileChooser.getMediaPath("sec3silence.wav");	
+	Sound collage10 = new Sound(silence);
+	System.out.println(collage10.getLength());
+	collage10.spliceHelloWorldTooMuchCode();
+	collage10.play();
+	*/
+		  
+		  
+	// Create sound object for task 1 & 2 and assign a sound file to it 
+	//Sound sound = new Sound(FileChooser.getMediaPath("thisisatest.wav"));
+	
+	/*
+	// Task 2: alter volume, +ve waveform increases by half, -ve waveform increases by 2.0
+	sound.explore();
+	sound.halvePosDoubleNeg();
+    sound.explore();
+    */
+    
+    
+    /*
+    // Task 1: increaseVolume + increaseVolume wit multiplication factor
+    sound.explore();
+    sound.increaseVolume2();
+    sound.play();
+    //sound.write("/Users/Shared/Java-Libraries/CourseCD/results/Homework-test.wav");
+    */
+  }
+             
+} // this } is the end of class Sound, put all new methods before this

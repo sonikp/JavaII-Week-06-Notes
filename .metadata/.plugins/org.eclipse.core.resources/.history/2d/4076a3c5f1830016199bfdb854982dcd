@@ -1,0 +1,106 @@
+public class Example02
+{
+	public static void main(String[] args)
+	{
+		System.out.println("=====3.6 Working with Media======\n\n");
+		
+		
+		/*
+		
+		new Class(parameterList)
+		
+		
+		*/
+		
+		// 3.6.1 Creating a picture object
+		// Creates a picture object, but not displayed on the screen
+		//System.out.println(new Picture());	
+		
+		// 3.6.2 Showing a picture; shows picture object but no picture
+		//Picture picture1 = new Picture();
+		//picture1.show();
+		
+		//  Use FileChooser to choose a file to display
+		//System.out.println(FileChooser.pickAFile());
+		// Returns: path of selected file /home/notroot/Java/JavaII/AdditionalSoftware/mediasources/7inX95in.jpg
+		
+		// Create a picture object and select a file to display
+		//System.out.println(new Picture(FileChooser.pickAFile()));
+		// Returns: Picture, filename /home/notroot/Java/JavaII/AdditionalSoftware/mediasources/640x480.jpg height 480 width 640
+		
+		// 3.6.3 Variable Substitution
+		// new Picture(FileChooser.pickAFile()).show();
+		
+		// Same as above
+		String fileName = FileChooser.pickAFile();
+		Picture pictureObj = new Picture(fileName);
+		pictureObj.show();
+		
+		// 3.6.4 Object References
+		
+		/*
+		When the type of a variable is the name of a class (like String) the this is called an "object reference"
+		Unlike primitive variables, object variables do not reserve space for the value of the variable. How much space is needed?
+		The amount of space needed for an object depends on the number and types of field (data) each object of that class has.
+		Object variables (references) reserve space for a reference to an object of the given class. A reference allows the computer
+		to determine the address of the actual object.
+		
+		*/
+		 // 3.6.5 Playing a sound
+		
+		System.out.println(FileChooser.pickAFile());
+		System.out.println(new Sound(FileChooser.pickAFile()));
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+}

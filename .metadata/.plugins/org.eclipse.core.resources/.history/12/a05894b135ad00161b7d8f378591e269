@@ -1,0 +1,10 @@
+import javax.swing.JFrame;
+
+public class TestCrapsLayoutFrame extends JFrame 
+{
+	public TestCrapsNewFrame(String title)
+	{
+		
+	}
+	  
+}

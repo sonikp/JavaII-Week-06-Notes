@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename source folder &apos;JavaII-Week-07n08-Notes/icons&apos; to &apos;icon&apos;&#x0A;- Original project: &apos;JavaII-Week-07n08-Notes&apos;&#x0A;- Original element: &apos;JavaII-Week-07n08-Notes/icons&apos;&#x0A;- Renamed element: &apos;icons&apos;" description="Rename source folder &apos;icons&apos;" id="org.eclipse.jdt.ui.rename.source.folder" input="/icons" name="icon" stamp="1478183392656" version="1.0"/>
+</session>

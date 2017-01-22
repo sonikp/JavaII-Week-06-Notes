@@ -1,0 +1,41 @@
+public class Example02
+{
+	public static void main(String[] args)
+	{
+		System.out.println("=====3.6 Working with Media======\n\n");
+		
+		
+		/*
+		
+		new Class(parameterList)
+		
+		
+		*/
+		
+		// 3.6.1 Creating a picture object
+		// Creates a picture object, but not displayed on the screen
+		//System.out.println(new Picture());	
+		
+		// 3.6.2 Showing a picture; shows picture object but no picture
+		//Picture picture1 = new Picture();
+		//picture1.show();
+		
+		//  Use FileChooser to choose a file to display
+		//System.out.println(FileChooser.pickAFile());
+		// Returns: path of selected file /home/notroot/Java/JavaII/AdditionalSoftware/mediasources/7inX95in.jpg
+		
+		// Create a picture object and select a file to display
+		//System.out.println(new Picture(FileChooser.pickAFile()));
+		// Returns: Picture, filename /home/notroot/Java/JavaII/AdditionalSoftware/mediasources/640x480.jpg height 480 width 640
+		
+		// 3.6.3 Variable Substitution
+		// new Picture(FileChooser.pickAFile()).show();
+		
+		// Same as above
+		String fileName = FileChooser.pickAFile();
+		Picture pictureObj = new Picture(fileName);
+		pictureObj.show();
+		
+		
+	}
+}

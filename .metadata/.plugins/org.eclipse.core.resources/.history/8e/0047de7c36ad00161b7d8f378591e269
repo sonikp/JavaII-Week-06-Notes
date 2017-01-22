@@ -1,0 +1,35 @@
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class TestCrapsLayoutFrame extends JFrame 
+{
+	private JPanel mainPanel;
+	private JPanel crapsPanel;
+	
+	public TestCrapsNewFrame(String title)
+	{
+		
+	}
+	
+	public TestCrapsNewFrame(String title)
+	{
+		super( title );
+	    mainPanel = new JPanel( new BorderLayout() );
+	    mainPanel.setSize(200, 250);
+	    this.setContentPane( mainPanel );
+	    
+	    crapsPanel = new JPanel( new FlowLayout() );    // original
+	    crapsPanel.setSize(200, 200);
+	    
+	    setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+
+	    setSize( 300, 300 );
+	    setVisible( true );
+	    validate();
+		
+	}
+	  
+}

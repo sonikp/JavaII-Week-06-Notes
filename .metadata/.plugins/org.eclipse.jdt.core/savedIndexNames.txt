@@ -1,0 +1,4 @@
+INDEX VERSION 1.129+/home/notroot/Java/JavaII/workspace-JavaII/.metadata/.plugins/org.eclipse.jdt.core
+3409855194.index
+3608438159.index
+3765020915.index
